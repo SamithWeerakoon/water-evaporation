@@ -4,3 +4,5 @@ matplotlib
 scikit-learn
 openpyxl
 plotly
+fastapi
+uvicorn[standard]

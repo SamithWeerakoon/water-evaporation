@@ -3,3 +3,5 @@ __pycache__/
 dashboard.html
 output/
 nohup.out
+frontend/node_modules/
+frontend/.vite/

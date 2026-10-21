@@ -1,4 +1,11 @@
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 import { accents, useTheme } from "../theme.jsx";
 import { MONTHS } from "../api.js";
 import { tooltipProps } from "./chartUtils.js";
@@ -18,12 +25,14 @@ export default function ShareDonut({ share, avgYearly }) {
         <PieChart>
           <Tooltip {...tooltipProps(c)}
             formatter={(v, n, p) => [`${v} mm (${(p.percent * 100).toFixed(1)}%)`, n]} />
-          <Pie data={data} dataKey="value" nameKey="name" innerRadius="58%"
-            outerRadius="84%" paddingAngle={2} stroke={c.card} strokeWidth={2}>
+          <Pie data={data} dataKey="value" nameKey="name" innerRadius="50%"
+            outerRadius="76%" paddingAngle={2} stroke={c.card} strokeWidth={2}>
             {data.map((d, i) => (
               <Cell key={d.name} fill={COLORS[i % COLORS.length]} />
             ))}
           </Pie>
+          <Legend iconType="circle" iconSize={8}
+            wrapperStyle={{ fontSize: 10, color: c.text, lineHeight: "16px" }} />
         </PieChart>
       </ResponsiveContainer>
       <div className="donut-center">

@@ -4,6 +4,7 @@ import {
   CartesianGrid,
   Cell,
   LabelList,
+  Legend,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -31,7 +32,8 @@ export default function RainfallChart({ rainfall }) {
         <ReferenceLine y={avg} stroke={accents.gold} strokeDasharray="6 4"
           label={{ value: `avg ${avg.toFixed(0)}`, position: "insideTopRight",
                    fill: accents.gold, fontSize: 11 }} />
-        <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+        <Legend wrapperStyle={{ fontSize: 11, color: c.text }} />
+        <Bar dataKey="value" name="Rainfall" radius={[8, 8, 0, 0]}>
           {data.map((d) => (
             <Cell key={d.month}
               fill={lerp("#BDE7F4", accents.blue, (d.value - min) / (max - min || 1))} />

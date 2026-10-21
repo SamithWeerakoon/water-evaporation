@@ -2,6 +2,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -11,7 +12,7 @@ import { accents, useTheme } from "../theme.jsx";
 import { MONTHS } from "../api.js";
 import { axisProps, tooltipProps } from "./chartUtils.js";
 
-function MiniBar({ data, color, unit, c }) {
+function MiniBar({ data, color, unit, name, c }) {
   const margin = { top: 16, right: 8, left: 0, bottom: 0 };
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -22,7 +23,8 @@ function MiniBar({ data, color, unit, c }) {
         <Tooltip {...tooltipProps(c)}
           labelFormatter={(m) => MONTHS[m - 1]}
           formatter={(v) => [`${v} ${unit}`, ""]} />
-        <Bar dataKey="value" fill={color} radius={[5, 5, 0, 0]} />
+        <Legend wrapperStyle={{ fontSize: 11, color: c.text }} />
+        <Bar dataKey="value" name={name} fill={color} radius={[5, 5, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -35,13 +37,13 @@ export default function MonthlyPattern({ pattern, rate }) {
       <div>
         <p className="mini-title">Total mm / month</p>
         <div className="mini-chart">
-          <MiniBar data={pattern} color={accents.cyan} unit="mm" c={c} />
+          <MiniBar data={pattern} color={accents.cyan} unit="mm" name="mm / month" c={c} />
         </div>
       </div>
       <div>
         <p className="mini-title">Daily rate mm/day</p>
         <div className="mini-chart">
-          <MiniBar data={rate} color={accents.teal} unit="mm/day" c={c} />
+          <MiniBar data={rate} color={accents.teal} unit="mm/day" name="mm / day" c={c} />
         </div>
       </div>
     </div>

@@ -62,5 +62,10 @@ python3 dashboard.py                 # regenerate legacy dashboard.html and serv
 ## Git
 
 - Remote: `github.com/SamithWeerakoon/water-evaporation` (branch `main`).
-- Only commit/push when the user asks. Push with a transient token URL, then reset:
+- **Never push automatically.** Commit only when asked, and always ask the user for
+  explicit confirmation before every push.
+- **Never overwrite/replace releases.** Each push is a new version (`v1.0`, `v1.1`,
+  `v1.2`, ...) via an annotated tag; keep the newest **3** versions available.
+  Do not force-push or amend pushed commits.
+- Push with a transient token URL, then reset:
   `git remote set-url origin https://github.com/SamithWeerakoon/water-evaporation.git`.

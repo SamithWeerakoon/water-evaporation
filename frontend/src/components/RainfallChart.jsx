@@ -24,15 +24,20 @@ export default function RainfallChart({ rainfall }) {
   const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} margin={{ top: 22, right: 12, left: 0, bottom: 0 }}>
+      <BarChart data={data} margin={{ top: 30, right: 16, left: 6, bottom: 20 }}>
         <CartesianGrid stroke={c.grid} vertical={false} />
-        <XAxis dataKey="month" {...axisProps(c)} />
-        <YAxis width={42} domain={[0, max * 1.18]} {...axisProps(c)} axisLine={false} />
+        <XAxis dataKey="month" {...axisProps(c)}
+          label={{ value: "Month", position: "insideBottom", offset: -12,
+                   fill: c.muted, fontSize: 11 }} />
+        <YAxis width={58} domain={[0, max * 1.18]} {...axisProps(c)} axisLine={false}
+          label={{ value: "Rainfall (mm)", angle: -90, position: "insideLeft",
+                   fill: c.muted, fontSize: 11, dx: 4 }} />
         <Tooltip {...tooltipProps(c)} formatter={(v) => [`${v} mm`, "Rainfall"]} />
         <ReferenceLine y={avg} stroke={accents.gold} strokeDasharray="6 4"
           label={{ value: `avg ${avg.toFixed(0)}`, position: "insideTopRight",
                    fill: accents.gold, fontSize: 11 }} />
-        <Legend wrapperStyle={{ fontSize: 11, color: c.text }} />
+        <Legend verticalAlign="top" align="right" height={26}
+          wrapperStyle={{ fontSize: 12, color: c.text, paddingBottom: 4 }} />
         <Bar dataKey="value" name="Rainfall" radius={[8, 8, 0, 0]}>
           {data.map((d) => (
             <Cell key={d.month}

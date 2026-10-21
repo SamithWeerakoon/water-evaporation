@@ -13,17 +13,23 @@ import { MONTHS } from "../api.js";
 import { axisProps, tooltipProps } from "./chartUtils.js";
 
 function MiniBar({ data, color, unit, name, c }) {
-  const margin = { top: 16, right: 8, left: 0, bottom: 0 };
+  const margin = { top: 28, right: 8, left: 4, bottom: 18 };
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} margin={margin}>
         <CartesianGrid stroke={c.grid} vertical={false} />
-        <XAxis dataKey="month" tickFormatter={(m) => MONTHS[m - 1]} {...axisProps(c)} />
-        <YAxis width={40} {...axisProps(c)} axisLine={false} />
+        <XAxis dataKey="month" tickFormatter={(m) => MONTHS[m - 1]} {...axisProps(c)}
+          label={{ value: "Month", position: "insideBottom", offset: -12,
+                   fill: c.muted, fontSize: 11 }} />
+        <YAxis width={48} {...axisProps(c)} axisLine={false}
+          label={{ value: unit === "mm" ? "Monthly total (mm)" : "Daily rate (mm/day)",
+                   angle: -90, position: "insideLeft",
+                   fill: c.muted, fontSize: 10, dx: 4 }} />
         <Tooltip {...tooltipProps(c)}
           labelFormatter={(m) => MONTHS[m - 1]}
           formatter={(v) => [`${v} ${unit}`, ""]} />
-        <Legend wrapperStyle={{ fontSize: 11, color: c.text }} />
+        <Legend verticalAlign="top" align="right" height={22}
+          wrapperStyle={{ fontSize: 11, color: c.text, paddingBottom: 2 }} />
         <Bar dataKey="value" name={name} fill={color} radius={[5, 5, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>

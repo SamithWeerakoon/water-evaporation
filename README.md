@@ -229,7 +229,20 @@ invented numbers.
   `frontend/node_modules/`, `frontend/.vite/`.
 - `data/ight-dashboard-reference.png` is untracked on purpose (design reference) —
   in `git add -A` workflows, unstage it.
-- Only commit/push when asked. Push with a transient token URL, then clean it:
+- **Never push automatically** — ask first, every time.
+- **Versioned releases, never overwritten:** each push gets an annotated tag
+  (`v1.0`, `v1.1`, `v1.2`, ...). The last **3** versions are kept so a broken
+  update can be recovered:
+
+  ```bash
+  git fetch --tags
+  git checkout v1.1        # inspect an older version
+  # or start from it:
+  git switch -c fix-from-v1.1 v1.1
+  ```
+
+  `main` always holds the latest version; do not force-push or amend published
+  commits. Push with a transient token URL, then clean it:
   `git remote set-url origin https://github.com/SamithWeerakoon/water-evaporation.git`.
 - No automated tests, linter, or typechecker. Verification = frontend build
   succeeds + API endpoints return 200 + `http://localhost:8060` loads.
